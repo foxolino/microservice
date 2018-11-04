@@ -5,7 +5,7 @@
 <body>
     
     <div id="app">
-        <button v-on:click='refreshList()'>Refresh</button>
+        <button v-on:click='refreshList()'>Get all Trainings</button>
         <ul id="example-1">
             <li v-for="item in items">
             {{ item.title }} <button v-on:click='deleteThis(item.id)'>Delete</button>
@@ -19,22 +19,22 @@
         data: {
             items: [
                 {
-                    id: 1,
-                    title: 'Eins',
+                    id: 11,
+                    title: 'Id 11',
                 },
                 {
-                    id: 2,
-                    title: 'Zwei',
+                    id: 12,
+                    title: 'Id 12',
                 },
                 {
-                    id: 3,
-                    title: 'Drei',
+                    id: 13,
+                    title: 'Id 13',
                 }
             ]
         },
         methods: {
             refreshList: function() {
-                fetch('/trainings').then(
+                fetch('http://127.0.0.1:8000/trainings').then(
                     response => {
                         return response.json();
                     }
@@ -43,8 +43,8 @@
                 });
             },
             deleteThis: function (id) {
-                fetch('/trainings/' + id, {
-                    method: 'delete'
+                fetch('http://127.0.0.1:8000/trainings/' + id, {
+                    method: 'DELETE'
                 }).then(response => {
                     if (response.ok()) {
                         this.refreshList();
