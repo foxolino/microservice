@@ -1,14 +1,15 @@
 package catalog
 
+import "time"
+
 // Scedule all Trainings
 type Scedule interface {
 	AddTraining(t Training) int
 	AllTrainings() []Training
-	FindTraining(time string) []Training
-	TrainingById(id int) (Training, bool)
-	Delete(id int) bool
-	Contains(name string) bool
-	Update(id int, t Training) bool
+	FindTrainings(fromTime string, toTime string) []Training
+	Delete(id int32) bool
+	Update(id int32, t Training) bool
+	TrainingById(id int32) (Training, bool)
 }
 
 // DefaultScedule for all Trainings
@@ -17,8 +18,8 @@ type DefaultScedule struct {
 }
 
 // AddTraining to scedule
-func (s *DefaultScedule) AddTraining(p Training) int {
-	s.trainings = append(s.trainings, p)
+func (s *DefaultScedule) AddTraining(t Training) int {
+	s.trainings = append(s.trainings, t)
 	return 0
 }
 
@@ -28,19 +29,19 @@ func (s *DefaultScedule) AllTrainings() []Training {
 }
 
 // FindTrainings by time
-func (s *DefaultScedule) FindTrainings(time string) []Training {
-	return s.trainings
-}
-
-// TrainingByID in default scedule
-func (s *DefaultScedule) TrainingByID(id int32) (Training, bool) {
+func (s *DefaultScedule) FindTrainings(startTime string, endTime string) []Training {
+	var start, end time.Time
+	layout := "15:04"
+	start, _ = time.Parse(layout, startTime)
+	end, _ = time.Parse(layout, endTime)
+	var rv []Training
 	for _, t := range s.trainings {
-		if t.ID == id {
-			return t, true
+		if t.Time <= start && t.Time <= start {
+			rv = append(rv, t)
 		}
 	}
 
-	return Training{}, false
+	return rv
 }
 
 // Delete training
@@ -63,22 +64,23 @@ func index(id int32, t []Training) int {
 	return -1
 }
 
-// Contains name
-func (s *DefaultScedule) Contains(name string) bool {
-	for _, p := range s.AllTrainings() {
-		if p.Name == name {
-			return true
-		}
-	}
-	return false
-}
-
 // Update Training (by Id) in Scedule
-func (s *DefaultScedule) Update(id int32, p Training) bool {
+func (s *DefaultScedule) Update(id int32, t Training) bool {
 	if i := index(id, s.trainings); i != -1 {
-		s.trainings[i] = p
+		s.trainings[i] = t
 		return true
 	}
 
 	return false
+}
+
+// TrainingByID in default scedule
+func (s *DefaultScedule) TrainingByID(id int32) (Training, bool) {
+	for _, t := range s.trainings {
+		if t.ID == id {
+			return t, true
+		}
+	}
+
+	return Training{}, false
 }

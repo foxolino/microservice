@@ -5,31 +5,31 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"time"
 
 	"./catalog"
+	"./handler"
 )
 
 func main() {
-	http.HandleFunc("/", myHandler())
+	// Fill scedule catalag
+	s := catalog.DefaultScedule{}
+	fillScedules(&s)
+
+	// Create http-Listener
 	port := 8000
 	fmt.Println("Server started on port", port, "...")
-	http.ListenAndServe(":"+strconv.Itoa(port), nil)
+	http.ListenAndServe(":"+strconv.Itoa(port), handler.TrainingsRouter(s))
 }
 
-func myHandler() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		// Init catalog
-		s := catalog.DefaultScedule{}
-		tecinf := catalog.Training{11, "Tech Inf", "Technische Informatik", catalog.Teacher{101, "Norbert Jung", 55, "njung@fbrs.de"}, 250}
-		teoinf := catalog.Training{11, "Theo Inf", "Theoretische Informatik", catalog.Teacher{101, "Kurt-Ulrich Witt", 59, "witt@fbrs.de"}, 400}
-		s.AddTraining(tecinf)
-		s.AddTraining(teoinf)
-
-		for _, t := range s.AllTrainings() {
-			jsonrv, _ := json.Marshal(&t)
-			fmt.Fprint(w, string(jsonrv))
-		}
-
-		// fmt.Println(string(jsonrv))
-	}
+// fillScedules with some trainings to demo
+func fillScedules(s *catalog.DefaultScedule) {
+	var startTime time.Time
+	startTime, _ = time.Parse("10:30", "10:30")
+	s.AddTraining(catalog.Training{11, "Tech Inf", "Technische Informatik", catalog.Teacher{101, "Norbert Jung", 55, "jung@fbrs.de"}, startTime, 250})
+	s.AddTraining(catalog.Training{12, "Theo Inf", "Theoretische Informatik", catalog.Teacher{102, "Kurt-Ulrich Witt", 59, "witt@fbrs.de"}, startTime, 400})
+	s.AddTraining(catalog.Training{13, "Kom Tech", "Kommunikationstechnik", catalog.Teacher{103, "Kerstin Uhde", 49, "uhde@fbrs.de"}, startTime, 150})
+	test := catalog.Training{11, "Tech Inf", "Technische Informatik", catalog.Teacher{101, "Norbert Jung", 55, "jung@fbrs.de"}, startTime, 250}
+	jsonrv, _ := json.Marshal(&test)
+	fmt.Println(jsonrv)
 }
