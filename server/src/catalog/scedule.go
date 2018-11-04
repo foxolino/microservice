@@ -36,7 +36,7 @@ func (s *DefaultScedule) FindTrainings(startTime string, endTime string) []Train
 	end, _ = time.Parse(layout, endTime)
 	var rv []Training
 	for _, t := range s.trainings {
-		if t.Time <= start && t.Time <= start {
+		if (t.Time.After(start) || t.Time.Equal(start)) && (t.Time.Before(end) || t.Time.Equal(end)) {
 			rv = append(rv, t)
 		}
 	}
