@@ -1,48 +1,53 @@
 package catalog
 
 import (
-	"fmt"
 	"testing"
 	"time"
 )
 
-// func TestAddTraining(t *testing.T) {
+func TestAddTraining(t *testing.T) {
+	layout := "15:04"
+	var startTime time.Time
+	startTime, _ = time.Parse(layout, "10:30")
 
-// 	// Setup
-// 	s := DefaultScedule{}
+	// Setup
+	s := DefaultScedule{}
 
-// 	// Method under test
-// 	s.AddTraining(Training{11, "Theo Inf", "Theoretische Informatik", Teacher{101, "Norbert Jung", 55, "njung@fbrs.de"}, 250})
+	// Method under test
+	s.AddTraining(Training{11, "Theo Inf", "Theoretische Informatik", Teacher{101, "Norbert Jung", 55, "njung@fbrs.de"}, startTime, 250})
 
-// 	// Assertions
-// 	if len(s.AllTrainings()) != 1 {
-// 		t.Fatalf("wanted %d, got %d", 1, len(s.AllTrainings()))
-// 	}
-// }
+	// Assertions
+	if len(s.AllTrainings()) != 1 {
+		t.Fatalf("wanted %d, got %d", 1, len(s.AllTrainings()))
+	}
+}
 
-// func TestDelete(t *testing.T) {
+func TestDelete(t *testing.T) {
+	layout := "15:04"
+	var startTime time.Time
+	startTime, _ = time.Parse(layout, "10:30")
 
-// 	// Init catalog
-// 	s := DefaultScedule{}
-// 	s.AddTraining(Training{11, "Tech Inf", "Technische Informatik", Teacher{101, "Norbert Jung", 55, "njung@fbrs.de"}, 250})
-// 	s.AddTraining(Training{12, "Theo Inf", "Theoretische Informatik", Teacher{101, "Kurt-Ulrich Witt", 59, "witt@fbrs.de"}, 400})
+	// Init catalog
+	s := DefaultScedule{}
+	s.AddTraining(Training{11, "Tech Inf", "Technische Informatik", Teacher{101, "Norbert Jung", 55, "njung@fbrs.de"}, startTime, 250})
+	s.AddTraining(Training{12, "Theo Inf", "Theoretische Informatik", Teacher{101, "Kurt-Ulrich Witt", 59, "witt@fbrs.de"}, startTime, 400})
 
-// 	// Assertion for 2 elements
-// 	if len(s.AllTrainings()) != 2 {
-// 		t.Fatalf("wanted %d, got %d", 2, len(s.AllTrainings()))
-// 	}
+	// Assertion for 2 elements
+	if len(s.AllTrainings()) != 2 {
+		t.Fatalf("wanted %d, got %d", 2, len(s.AllTrainings()))
+	}
 
-// 	s.Delete(12)
+	s.Delete(12)
 
-// 	// Assertions for 1 elements
-// 	if len(s.AllTrainings()) != 1 {
-// 		t.Fatalf("wanted %d, got %d", 1, len(s.AllTrainings()))
-// 	}
-// }
+	// Assertions for 1 elements
+	if len(s.AllTrainings()) != 1 {
+		t.Fatalf("wanted %d, got %d", 1, len(s.AllTrainings()))
+	}
+}
 
 func TestFindTrainings(t *testing.T) {
 
-	// Init catalog
+	//Init catalog
 	s := DefaultScedule{}
 
 	layout := "15:04"
@@ -67,7 +72,6 @@ func TestFindTrainings(t *testing.T) {
 
 	// Find with start smaller than training
 	testcase, ts = "start smaller", s.FindTrainings("11:29", "12:29")
-	fmt.Println(testcase, ": Find ", len(ts), " Trainings")
 	wanted = int32(12)
 	if len(ts) != 1 {
 		t.Fatalf(testcase+": wanted %d, got %d", 1, len(ts))
@@ -78,7 +82,6 @@ func TestFindTrainings(t *testing.T) {
 
 	// Find with end equal to training
 	testcase, ts = "end equal", s.FindTrainings("12:30", "12:31")
-	fmt.Println(testcase, ": Find ", len(ts), " Trainings")
 	wanted = int32(13)
 	if len(ts) != 1 {
 		t.Fatalf(testcase+": wanted %d, got %d", 1, len(ts))
@@ -89,7 +92,6 @@ func TestFindTrainings(t *testing.T) {
 
 	// Find with end greater than training
 	testcase, ts = "end greater", s.FindTrainings("11:29", "11:30")
-	fmt.Println(testcase, ": Find ", len(ts), " Trainings")
 	wanted = int32(12)
 	if len(ts) != 1 {
 		t.Fatalf(testcase+": wanted %d, got %d", 1, len(ts))
@@ -99,7 +101,6 @@ func TestFindTrainings(t *testing.T) {
 	}
 	// Find with start equal to training and end equal to training
 	testcase, ts = "start equal, end equal", s.FindTrainings("11:30", "12:30")
-	fmt.Println(testcase, ": Find ", len(ts), " Trainings")
 	if len(ts) != 2 {
 		t.Fatalf(testcase+": wanted %d, got %d", 2, len(ts))
 	}

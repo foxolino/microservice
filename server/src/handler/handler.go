@@ -20,9 +20,9 @@ func MakeGetTrainingHandler(scedule catalog.Scedule) func(w http.ResponseWriter,
 			return
 		}
 
-		if products, ok := scedule.TrainingById(int32(id)); ok {
+		if products, ok := scedule.TrainingByID(int32(id)); ok {
 			if json, err := json.Marshal(products); err == nil {
-				fmt.Fprintf(w, string(json))
+				fmt.Fprintln(w, string(json))
 			} else {
 				w.WriteHeader(http.StatusBadRequest)
 			}
@@ -52,7 +52,7 @@ func MakeTrainingsHandler(scedule catalog.Scedule) func(w http.ResponseWriter, r
 
 		if json, err := json.Marshal(trainings); err == nil {
 			w.Header().Set("Content-Type", "application/json")
-			fmt.Fprintf(w, string(json))
+			fmt.Fprintln(w, string(json))
 		} else {
 			w.WriteHeader(http.StatusBadRequest)
 		}

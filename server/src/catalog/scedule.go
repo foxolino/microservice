@@ -6,15 +6,21 @@ import "time"
 type Scedule interface {
 	AddTraining(t Training) int
 	AllTrainings() []Training
-	FindTrainings(fromTime string, toTime string) []Training
+	FindTrainings(startTime string, endTime string) []Training
 	Delete(id int32) bool
 	Update(id int32, t Training) bool
-	TrainingById(id int32) (Training, bool)
+	TrainingByID(id int32) (Training, bool)
 }
 
 // DefaultScedule for all Trainings
 type DefaultScedule struct {
 	trainings []Training
+}
+
+// NewMyDefaultScedule for getting an Pointer back
+func NewMyDefaultScedule() *DefaultScedule {
+	r := DefaultScedule{}
+	return &r
 }
 
 // AddTraining to scedule
