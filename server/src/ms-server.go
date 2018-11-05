@@ -30,4 +30,10 @@ func fillScedules(s *catalog.DefaultScedule) {
 	s.AddTraining(catalog.Training{12, "Theo Inf", "Theoretische Informatik", catalog.Teacher{102, "Kurt-Ulrich Witt", 59, "witt@fbrs.de"}, startTime, 400})
 	startTime, _ = time.Parse(layout, "12:30")
 	s.AddTraining(catalog.Training{13, "Kom Tech", "Kommunikationstechnik", catalog.Teacher{103, "Kerstin Uhde", 49, "uhde@fbrs.de"}, startTime, 150})
+	startTime, _ = time.Parse(layout, "14:30")
+	s.AddTraining(catalog.Training{14, "DB", "Datenbanken", catalog.Teacher{104, "Peter Becker", 39, "pbecker@fbrs.de"}, startTime, 300})
+	startTime, _ = time.Parse(layout, "15:30")
+	s.AddTraining(catalog.Training{15, "Einf Prog", "Einführung in die Programmierung ", catalog.Teacher{105, "Rudolf Berrendorf", 52, "pberrendorf@fbrs.de"}, startTime, 190})
+	startTime, _ = time.Parse(layout, "17:00")
+	s.AddTraining(catalog.Training{16, "Einf Prog", "Einführung in die Programmierung ", catalog.Teacher{106, "Karl Jonas", 50, "kjonas@fbrs.de"}, startTime, 290})
 }
