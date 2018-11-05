@@ -1,4 +1,4 @@
-Aufgabe
+#Aufgabe
 
 Ein Anbieter von Schulungen möchte seine Produkte online anbieten. Dazu benötigt er eine Web-Anwendung, auf der sich potentielle Kunden über das Schulungsangebot informieren und Schulungen buchen können. Jede Schulung wird an verschiedenen Terminen angeboten. An jedem Termin stehen 10 Teilnehmerplätze zur Verfügung, die von potentiellen Kunden einzeln gebucht werden können.
 
@@ -24,3 +24,27 @@ Erstelle in einer Frontend-Technologie Deiner Wahl einen Client, mit dem exempla
 4. Security
 Was würdest Du in dieser Anwendung zum Thema Security machen? Was muss warum abgesichert werden und welche Konzepte und Technologien würdest Du dafür einsetzen?
 Diese Aufgabe ist wieder reine Konzeption. Eine Umsetzung ist nicht erforderlich.
+
+
+#REST-API
+
+#Übersicht über alle angebotenen Schulungen (Name der Schulung, Beschreibung, Name des Dozenten, Preis, ...)
+
+**URL** : `/trainings`
+
+**Method** : `GET`
+
+**Auth required** : NO
+
+**Permissions required** : None
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content examples**
+
+Für nur eine vorhandene Schulung mit der Beschreibung Technische Informatik
+```json
+`[{"Id":11,"name":"Tech Inf","description":"Technische Informatik","Lecturer":{"Id":101,"Name":"Norbert Jung","Age":55,"EMail":"jung@fbrs.de"},"Time":"0000-01-01T10:30:00Z","Price":250}]`
+```

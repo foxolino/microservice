@@ -12,7 +12,7 @@ import (
 
 func main() {
 	// Fill scedule catalag
-	s := catalog.NewMyDefaultScedule()
+	s := &catalog.DefaultScedule{}
 	fillScedules(s)
 
 	// Create http-Listener

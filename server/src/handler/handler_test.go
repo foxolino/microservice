@@ -7,30 +7,33 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 
-	"bitbucket.org/rwirdemann/rest-apis-go/catalog"
+	"../catalog"
 	"github.com/gorilla/mux"
 )
 
 var router *mux.Router
-var repository catalog.Repository
+var scedule catalog.Scedule
 
 func init() {
 
 	// Setup mocks
-	repository = &catalog.DefaultRepository{}
-	p := catalog.Product{Id: 1, Name: "Schuhe"}
-	repository.AddProduct(p)
+	scedule = &catalog.DefaultScedule{}
+	layout := "15:04"
+	startTime, _ := time.Parse(layout, "10:30")
+	t := catalog.Training{11, "Tech Inf", "Technische Informatik", catalog.Teacher{101, "Norbert Jung", 55, "jung@fbrs.de"}, startTime, 250}
+	scedule.AddTraining(t)
 
-	router = NewRouter(repository)
+	router = TrainingsRouter(scedule)
 }
 
-func TestGetAllProducts(t *testing.T) {
+func TestGetAllTrainings(t *testing.T) {
 
-	// When: GET /catalog/products is called
-	req, _ := http.NewRequest("GET", "/catalog/products", nil)
+	// When: GET trainings/trainings is called
+	req, _ := http.NewRequest("GET", "/trainings", nil)
 	rr := httptest.NewRecorder()
 	router.ServeHTTP(rr, req)
 
@@ -38,14 +41,16 @@ func TestGetAllProducts(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rr.Code)
 
 	// And: Body contains 1 product
-	expected := `[{"Id":1,"Name":"Schuhe","Description":"","Category":"","Price":0}]`
-	assert.Equal(t, expected, rr.Body.String())
+	expected := `[{"Id":11,"name":"Tech Inf","description":"Technische Informatik","Lecturer":{"Id":101,"Name":"Norbert Jung","Age":55,"EMail":"jung@fbrs.de"},"Time":"0000-01-01T10:30:00Z","Price":250}]`
+	result := rr.Body.String()
+	result = result[0 : len(result)-1]
+	assert.Equal(t, expected, result)
 }
 
-func TestGetSingleProducts(t *testing.T) {
+func TestGetSingleTrainings(t *testing.T) {
 
-	// When: GET /catalog/products is called
-	req, _ := http.NewRequest("GET", "/catalog/products/1", nil)
+	// When: GET /trainings is called
+	req, _ := http.NewRequest("GET", "/trainings/11", nil)
 	rr := httptest.NewRecorder()
 	router.ServeHTTP(rr, req)
 
@@ -53,43 +58,31 @@ func TestGetSingleProducts(t *testing.T) {
 	assert.Equal(t, http.StatusOK, rr.Code)
 
 	// And: Body contains 1 product
-	expected := `{"Id":1,"Name":"Schuhe","Description":"","Category":"","Price":0}`
-	assert.Equal(t, expected, rr.Body.String())
+	expected := `{"Id":11,"name":"Tech Inf","description":"Technische Informatik","Lecturer":{"Id":101,"Name":"Norbert Jung","Age":55,"EMail":"jung@fbrs.de"},"Time":"0000-01-01T10:30:00Z","Price":250}`
+	result := rr.Body.String()
+	result = result[0 : len(result)-1]
+	assert.Equal(t, expected, result)
 }
 
-func TestAddProduct(t *testing.T) {
-	json, _ := json.Marshal(catalog.Product{Name: "Jacke"})
-	body := bytes.NewBuffer(json)
-	req, _ := http.NewRequest("POST", "/catalog/products", body)
-
-	rr := httptest.NewRecorder()
-	router.ServeHTTP(rr, req)
-
-	assert.Equal(t, http.StatusCreated, rr.Code)
-	assert.Regexp(t, "/catalog/products/[0-9]+", rr.Header()["Location"][0])
-	assert.True(t, repository.Contains("Jacke"))
-}
-
-func TestDeleteProducts(t *testing.T) {
-	req, _ := http.NewRequest("DELETE", "/catalog/products/1", nil)
+func TestDeleteTrainings(t *testing.T) {
+	req, _ := http.NewRequest("DELETE", "/trainings/11", nil)
 	rr := httptest.NewRecorder()
 	router.ServeHTTP(rr, req)
 
 	assert.Equal(t, http.StatusOK, rr.Code)
 
-	assert.Equal(t, 0, len(repository.AllProducts()))
+	assert.Equal(t, 0, len(scedule.AllTrainings()))
 }
 
-func TestUpdateProduct(t *testing.T) {
-	p, _ := repository.ProductById(1)
-	p.Name = "Herrenschuhe"
-	json, _ := json.Marshal(p)
+func TestUpdateTraining(t *testing.T) {
+	x, _ := scedule.TrainingByID(11)
+	x.Name = "Mathematik"
+	json, _ := json.Marshal(x)
 	body := bytes.NewBuffer(json)
-	req, _ := http.NewRequest("PUT", fmt.Sprintf("/catalog/products/%d", p.Id), body)
+	req, _ := http.NewRequest("PUT", fmt.Sprintf("/trainings/%d", x.ID), body)
 
 	rr := httptest.NewRecorder()
 	router.ServeHTTP(rr, req)
 
 	assert.Equal(t, http.StatusNoContent, rr.Code)
-	assert.True(t, repository.Contains("Herrenschuhe"))
 }

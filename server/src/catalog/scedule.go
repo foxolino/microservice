@@ -17,12 +17,6 @@ type DefaultScedule struct {
 	trainings []Training
 }
 
-// NewMyDefaultScedule for getting an Pointer back
-func NewMyDefaultScedule() *DefaultScedule {
-	r := DefaultScedule{}
-	return &r
-}
-
 // AddTraining to scedule
 func (s *DefaultScedule) AddTraining(t Training) int {
 	s.trainings = append(s.trainings, t)
