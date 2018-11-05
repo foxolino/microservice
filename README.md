@@ -57,3 +57,17 @@ Für nur eine vorhandene Schulung mit der Beschreibung Technische Informatik
     }
 ]
 ```
+## Notes
+Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück
+
+## Anzeige der Schulungen in einem bestimmten Zeitraum
+
+**URL** : `/trainings/{start}/{stop}`
+**Params** : {start} Anfang des Zeitraums als Uhrzeit Bsp: "12:20"
+{stop} Ende des Zeitraums als Uhrzeit Bsp: "15:30"
+**Method** : `GET`
+**Auth required** : NO
+**Permissions required** : None
+
+## Success Response
+**Code** : `200 OK`
