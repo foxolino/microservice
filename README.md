@@ -28,18 +28,14 @@ Diese Aufgabe ist wieder reine Konzeption. Eine Umsetzung ist nicht erforderlich
 
 ## REST-API
 
-# Übersicht über alle angebotenen Schulungen (Name der Schulung, Beschreibung, Name des Dozenten, Preis, ...)
+## Übersicht über alle angebotenen Schulungen (Name der Schulung, Beschreibung, Name des Dozenten, Preis, ...)
 
 **URL** : `/trainings`
-
 **Method** : `GET`
-
 **Auth required** : NO
-
 **Permissions required** : None
 
 ## Success Response
-
 **Code** : `200 OK`
 
 **Content examples**
