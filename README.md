@@ -46,5 +46,18 @@ Diese Aufgabe ist wieder reine Konzeption. Eine Umsetzung ist nicht erforderlich
 
 Für nur eine vorhandene Schulung mit der Beschreibung Technische Informatik
 ```json
-`[{"Id":11,"name":"Tech Inf","description":"Technische Informatik","Lecturer":{"Id":101,"Name":"Norbert Jung","Age":55,"EMail":"jung@fbrs.de"},"Time":"0000-01-01T10:30:00Z","Price":250}]`
+[
+    {
+    "Id":11,
+    "name":"Tech Inf",
+    "description":"Technische Informatik",
+    "Lecturer":{
+        "Id":101,
+        "Name":"Norbert Jung",
+        "Age":55,
+        "EMail":"jung@fbrs.de"},
+    "Time":"0000-01-01T10:30:00Z",
+    "Price":250
+    }
+]
 ```
