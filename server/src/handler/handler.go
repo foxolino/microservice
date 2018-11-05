@@ -20,12 +20,31 @@ func MakeGetTrainingHandler(scedule catalog.Scedule) func(w http.ResponseWriter,
 			return
 		}
 
-		if products, ok := scedule.TrainingByID(int32(id)); ok {
-			if json, err := json.Marshal(products); err == nil {
+		if trainings, ok := scedule.TrainingByID(int32(id)); ok {
+			if json, err := json.Marshal(trainings); err == nil {
 				fmt.Fprintln(w, string(json))
 			} else {
 				w.WriteHeader(http.StatusBadRequest)
 			}
+		}
+	}
+}
+
+func MakeGetTrainingTimeHandler(scedule catalog.Scedule) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		start := mux.Vars(r)["start"]
+		stop := mux.Vars(r)["stop"]
+
+		trainings := scedule.FindTrainings(start, stop)
+
+		if len(trainings) > 0 {
+			for _, t := range trainings {
+				if json, err := json.Marshal(t); err == nil {
+					fmt.Fprintln(w, string(json))
+				}
+			}
+		} else {
+			w.WriteHeader(http.StatusBadRequest)
 		}
 	}
 }
@@ -93,13 +112,13 @@ func MakeUpdateTrainingHandler(scedule catalog.Scedule) http.HandlerFunc {
 			return
 		}
 
-		var p catalog.Training
-		if err = json.Unmarshal(body, &p); err != nil {
+		var t catalog.Training
+		if err = json.Unmarshal(body, &t); err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 
-		if scedule.Update(int32(id), p) {
+		if scedule.Update(int32(id), t) {
 			w.WriteHeader(http.StatusNoContent)
 		} else {
 			w.WriteHeader(http.StatusNotFound)

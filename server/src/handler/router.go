@@ -11,6 +11,7 @@ func TrainingsRouter(scedule catalog.Scedule) *mux.Router {
 	r.HandleFunc("/trainings", MakeTrainingsHandler(scedule)).Methods("GET")
 	r.HandleFunc("/trainings", MakeAddTrainingHandler(scedule)).Methods("POST")
 	r.HandleFunc("/trainings/{id}", MakeGetTrainingHandler(scedule)).Methods("GET")
+	r.HandleFunc("/trainings/{start}/{stop}", MakeGetTrainingTimeHandler(scedule)).Methods("GET")
 	r.HandleFunc("/trainings/{id}", MakeDeleteTrainingHandler(scedule)).Methods("DELETE")
 	r.HandleFunc("/trainings/{id}", MakeUpdateTrainingHandler(scedule)).Methods("PUT")
 
