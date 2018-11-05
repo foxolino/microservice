@@ -28,11 +28,14 @@ Diese Aufgabe ist wieder reine Konzeption. Eine Umsetzung ist nicht erforderlich
 
 ## REST-API
 
-Übersicht über alle angebotenen Schulungen (Name der Schulung, Beschreibung, Name des Dozenten, Preis, ...) 
+## Übersicht über alle angebotenen Schulungen (Name der Schulung, Beschreibung, Name des Dozenten, Preis, ...) 
 
 **URL** : `/trainings`
+
 **Method** : `GET`
+
 **Auth required** : NO
+
 **Permissions required** : None
 
 ## Success Response
@@ -63,10 +66,15 @@ Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück
 ## Anzeige der Schulungen in einem bestimmten Zeitraum
 
 **URL** : `/trainings/{start}/{stop}`
-**Params** : {start} Anfang des Zeitraums als Uhrzeit Bsp: "12:20"
+
+**Params** : 
+{start} Anfang des Zeitraums als Uhrzeit Bsp: "12:20"
 {stop} Ende des Zeitraums als Uhrzeit Bsp: "15:30"
+
 **Method** : `GET`
+
 **Auth required** : NO
+
 **Permissions required** : None
 
 ## Success Response
