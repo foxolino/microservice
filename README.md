@@ -26,9 +26,9 @@ Was würdest Du in dieser Anwendung zum Thema Security machen? Was muss warum ab
 Diese Aufgabe ist wieder reine Konzeption. Eine Umsetzung ist nicht erforderlich.
 
 
-#REST-API
+## REST-API
 
-#Übersicht über alle angebotenen Schulungen (Name der Schulung, Beschreibung, Name des Dozenten, Preis, ...)
+# Übersicht über alle angebotenen Schulungen (Name der Schulung, Beschreibung, Name des Dozenten, Preis, ...)
 
 **URL** : `/trainings`
 
