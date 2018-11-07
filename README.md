@@ -1,6 +1,6 @@
 # REST-API
 Dies ist die REST-API für unser Schulungssystems mit der sich Schulungen anzeigen lassen und mit der eine Schulung gebucht werden kann. Folgende Funktionalitäten werden angeboten:
-
+<!-- ====================================================================== -->
 ## Übersicht über alle angebotenen Schulungen (Name der Schulung, Beschreibung, Name des Dozenten, Preis, ...) 
 
 **URL** : `/trainings`
@@ -37,7 +37,7 @@ Für nur eine vorhandene Schulung mit der Beschreibung Technische Informatik
 Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 
-
+<!-- ====================================================================== -->
 ## Anzeige der Schulungen in einem bestimmten Zeitraum
 
 **URL** : `/trainings/{start}/{stop}`
@@ -88,7 +88,7 @@ Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 ## Notes
 Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
-
+<!-- ====================================================================== -->
 ## Anzeige der Termine zu einer bestimmten Schulung
 
 **URL** : `/trainings/{name}`
@@ -104,6 +104,7 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 
 ## Success Response
 **Code** : `200 OK`
+
 
 **Content examples**
 
@@ -139,34 +140,31 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 
-
-## Anlegen/Verändern einer neuen Schulung
-**URL** : `/trainings/`
-
-**Params** : 
-
-
-**Method** : `PUT`
-
-**Auth required** : NO
-
-**Permissions required** : None
-
-## Success Response
-**Code** : `200 OK`
-
-## Error Response
-**Code**
-
-## Anlegen/Verändern eines neuen Termins für eine Schulung
+<!-- ====================================================================== -->
+## Verändern einer Schulung
 **URL** : `/trainings/{id}`
 
 **Params** : 
 {id} ID der Schulung
 
+**Method** : `POST`
 
-**Method** : `PUT`
+**Content-Type** : Application/json
 
+```json
+{
+"Id":11,
+"name":"Tech Inf",
+"description":"Technische Informatik",
+"Lecturer":{
+    "Id":101,
+    "Name":"Norbert Jung",
+    "Age":55,
+    "EMail":"jung@fbrs.de"},
+"Time":"0000-01-01T10:30:00Z",
+"Price":250
+}
+```
 **Auth required** : NO
 
 **Permissions required** : None
@@ -175,8 +173,9 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 **Code** : `200 OK`
 
 ## Error Response
-**Code**
+**Code** : `404 Not Found`
 
+<!-- ====================================================================== -->
 ## Löschen einer Schulung
 **URL** : `/trainings/{id}`
 
@@ -193,16 +192,25 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 **Code** : `200 OK`
 
 ## Error Response
-**Code**
-
+**Code** `404 Not Found`
+<!-- ====================================================================== -->
 ## Buchung einer Schulung an einem bestimmten Termin
-**URL** : `/trainings/`
+**URL** : `/book/{id}`
 
 **Params** : 
+{id} ID der Schulung
 
+**Method** : `POST`
 
-**Method** : `PUT`
+**Content-Type** : Application/json
 
+```json
+{
+"name":"Hans Müller",
+"address": "Oxfordstr. 77, 53111 Bonn",
+"payment": "..."
+}
+```
 **Auth required** : NO
 
 **Permissions required** : None
@@ -211,5 +219,7 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 **Code** : `200 OK`
 
 ## Error Response
-**Code**
+**Code** `404 Not Found`
 
+## Notes
+Z.Z. wird nur das anonyme Buchen einer Schulung unterstützt. 
