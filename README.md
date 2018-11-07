@@ -15,9 +15,9 @@ Dies ist die REST-API für unser Schulungssystems mit der sich Schulungen anzeig
 
 **Code** : `200 OK`
 
-**Content examples**
+**Content example**
 
-Für nur eine vorhandene Schulung mit der Beschreibung Technische Informatik
+Für nur eine vorhandene Schulung mit der Beschreibung Technische Informatik wird folgende JSON-Struktur zurückgegeben:
 ```json
 [
     {
@@ -35,6 +35,7 @@ Für nur eine vorhandene Schulung mit der Beschreibung Technische Informatik
 ]
 ```
 **Notes**
+
 Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 
@@ -47,7 +48,7 @@ Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 {start} Anfang des Zeitraums als Uhrzeit Bsp: "11:20"
 
-{stop} Ende des Zeitraums als Uhrzeit Bsp: "12:30"
+{stop} Ende des Zeitraums als Uhrzeit Bsp: "12:30". Beginnt eine Vorlesung zur stop-Zeit wird diese auch dem Ergebnis hinzugefügt.
 
 **Method** : `GET`
 
@@ -59,7 +60,8 @@ Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 **Code** : `200 OK`
 
-**Content examples**
+**Content example**
+Beispiel für die Abfrage: Start: 10:30, Stop:11:30:
 
 ```json
 [
@@ -90,6 +92,7 @@ Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 ]
 ```
 **Notes**
+
 Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 <!-- ====================================================================== -->
@@ -98,7 +101,8 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 **URL** : `/trainings/{name}`
 
 **Params** : 
-{name} Name der Schulung Bsp: "Technische Informatik"
+
+{name} Name der Schulung Bsp: "Technische Informatik". Gesucht wird sowohl im Name-Feld als auch Desciption-Feld der Schulungen.
 
 **Method** : `GET`
 
@@ -111,7 +115,7 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 **Code** : `200 OK`
 
 
-**Content examples**
+**Content example**
 
 ```json
 [
@@ -142,6 +146,7 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 ]
 ```
 **Notes**
+
 Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 
@@ -233,4 +238,5 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 **Code** `404 Not Found`
 
 **Notes**
+
 Z.Z. wird nur das anonyme Buchen einer Schulung unterstützt. 
