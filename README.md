@@ -11,7 +11,7 @@ Dies ist die REST-API für unser Schulungssystems mit der sich Schulungen anzeig
 
 **Permissions required** : None
 
-## Success Response
+**Success Response**
 **Code** : `200 OK`
 
 **Content examples**
@@ -33,7 +33,7 @@ Für nur eine vorhandene Schulung mit der Beschreibung Technische Informatik
     }
 ]
 ```
-## Notes
+**Notes**
 Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 
@@ -54,7 +54,7 @@ Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 **Permissions required** : None
 
-## Success Response
+**Success Response**
 **Code** : `200 OK`
 
 **Content examples**
@@ -87,7 +87,7 @@ Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
     }
 ]
 ```
-## Notes
+**Notes**
 Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 <!-- ====================================================================== -->
@@ -104,7 +104,7 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 
 **Permissions required** : None
 
-## Success Response
+**Success Response**
 **Code** : `200 OK`
 
 
@@ -138,7 +138,7 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
     }
 ]
 ```
-## Notes
+**Notes**
 Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 
@@ -171,10 +171,10 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 
 **Permissions required** : None
 
-## Success Response
+**Success Response**
 **Code** : `200 OK`
 
-## Error Response
+**Error Response**
 **Code** : `404 Not Found`
 
 <!-- ====================================================================== -->
@@ -190,10 +190,10 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 
 **Permissions required** : None
 
-## Success Response
+**Success Response**
 **Code** : `200 OK`
 
-## Error Response
+**Error Response**
 **Code** `404 Not Found`
 <!-- ====================================================================== -->
 ## Buchung einer Schulung an einem bestimmten Termin
@@ -217,11 +217,11 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 
 **Permissions required** : None
 
-## Success Response
+**Success Response**
 **Code** : `200 OK`
 
-## Error Response
+**Error Response**
 **Code** `404 Not Found`
 
-## Notes
+**Notes**
 Z.Z. wird nur das anonyme Buchen einer Schulung unterstützt. 
