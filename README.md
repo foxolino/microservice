@@ -12,6 +12,7 @@ Dies ist die REST-API für unser Schulungssystems mit der sich Schulungen anzeig
 **Permissions required** : None
 
 **Success Response**
+
 **Code** : `200 OK`
 
 **Content examples**
@@ -55,6 +56,7 @@ Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 **Permissions required** : None
 
 **Success Response**
+
 **Code** : `200 OK`
 
 **Content examples**
@@ -105,6 +107,7 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 **Permissions required** : None
 
 **Success Response**
+
 **Code** : `200 OK`
 
 
@@ -172,9 +175,11 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 **Permissions required** : None
 
 **Success Response**
+
 **Code** : `200 OK`
 
 **Error Response**
+
 **Code** : `404 Not Found`
 
 <!-- ====================================================================== -->
@@ -191,9 +196,11 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 **Permissions required** : None
 
 **Success Response**
+
 **Code** : `200 OK`
 
 **Error Response**
+
 **Code** `404 Not Found`
 <!-- ====================================================================== -->
 ## Buchung einer Schulung an einem bestimmten Termin
@@ -218,9 +225,11 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 **Permissions required** : None
 
 **Success Response**
+
 **Code** : `200 OK`
 
 **Error Response**
+
 **Code** `404 Not Found`
 
 **Notes**
