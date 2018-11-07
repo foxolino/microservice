@@ -1,5 +1,5 @@
 # REST-API
-Dies ist die REST-API für unser Schulungssystems mit der sich Schulungen anzeigen lassen und mit der eine Schulung gebucht werden kann. Folgende Funktionalitäten werden angeboten:
+Dies ist die REST-API für unser Schulungssystems mit der sich Schulungen anzeigen, verändern lassen und gebucht werden können. Folgende Funktionalitäten werden angeboten:
 <!-- ====================================================================== -->
 ## Übersicht über alle angebotenen Schulungen (Name der Schulung, Beschreibung, Name des Dozenten, Preis, ...) 
 
@@ -42,8 +42,10 @@ Sind noch keine Schulungen vorhanden, kommt eine leerer HTML-Body zurück.
 
 **URL** : `/trainings/{start}/{stop}`
 
-**Params** : 
+**Params** :
+
 {start} Anfang des Zeitraums als Uhrzeit Bsp: "11:20"
+
 {stop} Ende des Zeitraums als Uhrzeit Bsp: "12:30"
 
 **Method** : `GET`
