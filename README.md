@@ -157,7 +157,7 @@ Ist zu dem Zeitraums keine Schulungen vorhanden, kommt eine leerer HTML-Body zur
 **Params** : 
 {id} ID der Schulung
 
-**Method** : `POST`
+**Method** : `PUT`
 
 **Content-Type** : Application/json
 
